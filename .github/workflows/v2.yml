@@ -25,7 +25,7 @@ permissions:
 jobs:
   manifest:
     name: Manifest consistency (15 assertions)
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, owned-linux]
     steps:
       - uses: actions/checkout@v7
 
@@ -42,7 +42,7 @@ jobs:
 
   security:
     name: SSRF + DNS rebinding suite
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, owned-linux]
     steps:
       - uses: actions/checkout@v7
 
@@ -70,7 +70,7 @@ jobs:
 
   full_pytest:
     name: Full pytest suite
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, owned-linux]
     env:
       # sync_flow tests need an authenticated gh CLI to bypass the
       # 60/hr anonymous rate limit. Identical to ci.yml.
@@ -93,7 +93,7 @@ jobs:
 
   secret_scan:
     name: Secret scan
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, owned-linux]
     steps:
       - uses: actions/checkout@v7
 
@@ -117,7 +117,7 @@ jobs:
 
   audit_summary:
     name: Audit summary
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, owned-linux]
     needs: [manifest, security, full_pytest, secret_scan]
     if: always()
     steps:
